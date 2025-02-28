@@ -6,20 +6,32 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.d424_captstone_jv.ui.MainActivity.SignInFragment"
+        android:label="Sign In"
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.d424_captstone_jv.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:name="com.example.d424_captstone_jv.ui.MainActivity.DashboardFragment"
+        android:label="@string/menu_dashboard"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.d424_captstone_jv.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/menu_add_gig"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.d424_captstone_jv.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_gig_list"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>
