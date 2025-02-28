@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddGig.AddGigFragement">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Venue"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <EditText
+            android:id="@+id/input_venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter venue name"
+            android:inputType="text"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expected Payment"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <EditText
+            android:id="@+id/input_expected_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter expected payment"
+            android:inputType="numberDecimal"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set List"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <EditText
+            android:id="@+id/input_set_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter set list"
+            android:inputType="textMultiLine"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <Button
+            android:id="@+id/button_pick_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Date"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gig Status"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <RadioGroup
+            android:id="@+id/gig_status_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_upcoming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcoming"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radio_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completed"/>
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:id="@+id/completed_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Audience Feedback"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"/>
+
+            <EditText
+                android:id="@+id/input_audience_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter feedback"
+                android:inputType="textMultiLine"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actual Payment"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"/>
+
+            <EditText
+                android:id="@+id/input_actual_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter actual payment"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/button_save_gig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Gig"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

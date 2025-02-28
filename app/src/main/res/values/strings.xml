@@ -2,12 +2,13 @@
     <string name="app_name">D424_Captstone_jv</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Gig Tracker</string>
+    <string name="nav_header_subtitle">Keep track of all your band needs!</string>
+    <string name="nav_header_desc">Navigate the app</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_add_gig">Add Gig</string>
     <string name="menu_gig_list">Gig List</string>
+    <string name="menu_report_generation">Generate Reports</string>
 </resources>

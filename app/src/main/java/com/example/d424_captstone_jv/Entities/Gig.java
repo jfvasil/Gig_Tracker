@@ -13,16 +13,19 @@ public class Gig {
     public String setList;
     public double expectedPayment;
     public double actualPayment;
+
+    public String date;
     public String audienceFeedback;
     public boolean isCompleted;
     public boolean isPaid;
 
-    public Gig(String venue, String setList, double expectedPayment, double actualPayment,
+    public Gig(String venue, String setList, double expectedPayment, double actualPayment, String date,
                String audienceFeedback, boolean isCompleted, boolean isPaid) {
         this.venue = venue;
         this.setList = setList;
         this.expectedPayment = expectedPayment;
         this.actualPayment = actualPayment;
+        this.date = date;
         this.audienceFeedback = audienceFeedback;
         this.isCompleted = isCompleted;
         this.isPaid = isPaid;
@@ -69,6 +72,14 @@ public class Gig {
 
     public void setActualPayment(double actualPayment) {
         this.actualPayment = actualPayment;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getAudienceFeedback() {

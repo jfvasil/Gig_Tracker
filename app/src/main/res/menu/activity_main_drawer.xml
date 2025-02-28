@@ -16,5 +16,10 @@
             android:id="@+id/nav_gig_list"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_gig_list" />
+
+        <item
+            android:id="@+id/nav_report_generation"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_report_generation" />
     </group>
 </menu>
