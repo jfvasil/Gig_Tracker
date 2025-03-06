@@ -1,16 +1,16 @@
-package com.example.d424_captstone_jv.ui.slideshow;
+package com.example.d424_captstone_jv.ui.AddGig;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class AddGigViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public AddGigViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is the Add Gig page");
     }
 
     public LiveData<String> getText() {

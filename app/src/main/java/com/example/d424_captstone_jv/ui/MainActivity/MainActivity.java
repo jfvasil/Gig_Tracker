@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_dashboard, R.id.nav_add_gig, R.id.nav_gig_list, R.id.nav_report_generation)
                 .setOpenableLayout(drawer)
                 .build();
+
 
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
@@ -48,17 +49,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-
-            if (destination.getId() == R.id.signInFragment) {
-
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-
-            } else {
-
-                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-            }
-        });
+//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//
+//            if (destination.getId() == R.id.signInFragment) {
+//
+//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//
+//            } else {
+//
+//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//            }
+//        });
     }
 
     @Override

@@ -4,4 +4,11 @@
     <color name="primary_brown">#6D4C41</color>
     <color name="primary_background">#FFEBEE</color>
     <color name="primary_text">#000000</color>
+    <color name="primary">#8B0000</color>
+    <color name="primary_variant">#5B0000</color>
+    <color name="secondary">#A0522D</color>
+    <color name="secondary_variant">#8B4513</color>
+    <color name="background">#FAF3E0</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>
