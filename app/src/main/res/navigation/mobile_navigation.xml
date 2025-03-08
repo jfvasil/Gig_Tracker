@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_dashboard"
-        android:name="com.example.d424_captstone_jv.ui.MainActivity.DashboardFragment"
+        android:name="com.example.d424_captstone_jv.ui.Dashboard.DashboardFragment"
         android:label="@string/menu_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 

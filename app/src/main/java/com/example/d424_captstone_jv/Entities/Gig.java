@@ -20,7 +20,7 @@ public class Gig {
     public boolean isPaid;
 
     public Gig(String venue, String setList, double expectedPayment, double actualPayment, String date,
-               String audienceFeedback, boolean isCompleted, boolean isPaid) {
+               String audienceFeedback, boolean isCompleted) {
         this.venue = venue;
         this.setList = setList;
         this.expectedPayment = expectedPayment;
@@ -28,7 +28,7 @@ public class Gig {
         this.date = date;
         this.audienceFeedback = audienceFeedback;
         this.isCompleted = isCompleted;
-        this.isPaid = isPaid;
+
     }
 
     public Gig() {
@@ -98,11 +98,5 @@ public class Gig {
         isCompleted = completed;
     }
 
-    public boolean isPaid() {
-        return isPaid;
-    }
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
     }
-}

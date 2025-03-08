@@ -53,8 +53,8 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
-// Hilt Dependency Injection
-    id("kotlin-kapt") // Required for annotation processing
+
+    id("kotlin-kapt")
 }
 
 android {
@@ -94,7 +94,7 @@ android {
 }
 
 dependencies {
-    // AndroidX & Material UI
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -102,25 +102,25 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.itext)
 
-    // Room Database
+
     implementation(libs.room.runtime)
-    kapt(libs.room.compiler) // Required for annotation processing
+    kapt(libs.room.compiler)
 
-    // Hilt Dependency Injection
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    // Firebase Cloud Messaging (For Notifications)
+
     implementation(libs.firebase.messaging)
 
-    // MPAndroidChart (For Reports & Graphs)
-//    implementation(libs.mpandroidchart)
 
-    // WorkManager (For Background Tasks & Syncing)
+
+
     implementation(libs.work.runtime)
 
-    // Unit & UI Testing
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

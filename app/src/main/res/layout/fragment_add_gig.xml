@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddGig.AddGigFragement">
+    tools:context=".ui.AddGig.AddGigFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,8 +65,8 @@
             android:textSize="16sp"
             android:textColor="@android:color/black"/>
 
-        <Button
-            android:id="@+id/button_pick_date"
+        <TextView
+            android:id="@+id/gig_select_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Select Date"/>

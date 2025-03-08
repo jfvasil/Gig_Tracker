@@ -2,6 +2,8 @@ package com.example.d424_captstone_jv.Database;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.d424_captstone_jv.DAO.GigDao;
 import com.example.d424_captstone_jv.DAO.UserDao;
 import com.example.d424_captstone_jv.Entities.Gig;
@@ -34,8 +36,11 @@ public class GigRepository {
     }
 
 
-    public void insertGig(Gig gig) {
-        dbExecutor.execute(() -> gigDao.insert(gig));
+    public void insertGig(Gig gig, Runnable onSuccess) {
+        dbExecutor.execute(() -> {
+            gigDao.insert(gig);
+            onSuccess.run();
+        });
     }
 
 
@@ -47,9 +52,28 @@ public class GigRepository {
         dbExecutor.execute(() -> gigDao.delete(gig));
     }
 
+    public LiveData<List<Gig>> searchGigs(String query) {
+        return gigDao.searchGigs("%" + query + "%");
+    }
 
-    public List<Gig> getAllGigs() {
+    public LiveData<List<Gig>> getCompletedGigs() {
+        return gigDao.getCompletedGigs();
+    }
+
+    public LiveData<List<Gig>> getUpcomingGigs() {
+        return gigDao.getUpcomingGigs();
+    }
+
+    public LiveData<Double> getTotalPaymentsForMonth(String startDate, String endDate) {
+        return gigDao.getTotalPaymentsForMonth(startDate, endDate);
+    }
+
+    public LiveData<List<Gig>> getAllGigs() {
         return gigDao.getAllGigs();
+    }
+
+    public LiveData<List<Gig>> getGigsInDateRange(String startDate, String endDate) {
+        return gigDao.getGigsInDateRange(startDate, endDate);
     }
 
 

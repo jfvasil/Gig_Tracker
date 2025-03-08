@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.d424_captstone_jv.R;
+import com.example.d424_captstone_jv.ui.Dashboard.DashboardFragment;
 
 public class SignInFragment extends Fragment {
     private AuthViewModel authViewModel;
@@ -35,9 +36,9 @@ public class SignInFragment extends Fragment {
 
         authViewModel.getAuthStatus().observe(getViewLifecycleOwner(), success -> {
             if (success) {
-                // Navigate to Dashboard
+
                 getParentFragmentManager().beginTransaction()
-                        .replace(R.id.nav_view, new com.example.d424_captstone_jv.ui.MainActivity.DashboardFragment())
+                        .replace(R.id.nav_view, new DashboardFragment())
                         .addToBackStack(null)
                         .commit();
             } else {
