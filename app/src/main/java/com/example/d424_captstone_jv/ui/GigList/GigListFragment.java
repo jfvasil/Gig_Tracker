@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,8 @@ public class GigListFragment extends Fragment {
     private GigListViewModel gigListViewModel;
     private EditText searchBar;
     private RadioButton radioCompleted, radioUpcoming, radioAll;
+
+    private TextView textViewEmptyMessage;
     private GigAdapter gigAdapter;
 
     @Override
@@ -53,11 +56,26 @@ public class GigListFragment extends Fragment {
         radioCompleted = root.findViewById(R.id.filter_completed);
         radioUpcoming = root.findViewById(R.id.filter_upcoming);
 //        radioAll = root.findViewById(R.id.filter_all);
+        textViewEmptyMessage = root.findViewById(R.id.textViewEmptyMessage);
 
 
 
         gigListViewModel.getFilteredGigs().observe(getViewLifecycleOwner(), gigs -> {
             gigAdapter.setGigs(gigs);
+
+            if(gigAdapter.isEmpty()){
+                textViewEmptyMessage.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+
+            } else {
+
+                textViewEmptyMessage.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+
+
+
+
         });
 
 

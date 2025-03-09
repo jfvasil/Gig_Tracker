@@ -88,6 +88,10 @@ public class GigAdapter extends RecyclerView.Adapter<GigAdapter.GigViewHolder> {
         notifyDataSetChanged();
     }
 
+    public boolean isEmpty() {
+        return gigList.isEmpty();
+    }
+
 
     static class GigViewHolder extends RecyclerView.ViewHolder {
         TextView venueTextView, dateTextView, expectedPaymentTextView, actualPaymentTextView;

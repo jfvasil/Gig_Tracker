@@ -27,6 +27,8 @@ public class DashboardFragment extends Fragment {
     private GigAdapter gigAdapter;
     private TextView totalPaymentsTextView;
 
+    private TextView textViewEmptyMessage;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -48,10 +50,21 @@ public class DashboardFragment extends Fragment {
         upcomingGigsRecyclerView.setAdapter(gigAdapter);
 
         totalPaymentsTextView = root.findViewById(R.id.payment_summary_text);
+        textViewEmptyMessage = root.findViewById(R.id.text_view_empty_message_dashboard);
+
 
 
         dashboardViewModel.getUpcomingGigs().observe(getViewLifecycleOwner(), gigs -> {
             gigAdapter.setGigs(gigs);
+
+            if(gigAdapter.isEmpty()) {
+                textViewEmptyMessage.setVisibility(View.VISIBLE);
+                upcomingGigsRecyclerView.setVisibility(View.GONE);
+            } else {
+                textViewEmptyMessage.setVisibility(View.GONE);
+                upcomingGigsRecyclerView.setVisibility(View.VISIBLE);
+
+            }
         });
 
 

@@ -21,6 +21,7 @@
         android:layout_marginBottom="8dp"/>
 
 
+
     <RadioGroup
         android:id="@+id/filter_group"
         android:layout_width="match_parent"
@@ -48,11 +49,27 @@
             android:text="Completed"/>
     </RadioGroup>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gig_recycler_view"
+    <TextView
+        android:id="@+id/textViewEmptyMessage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_height="wrap_content"
+        android:text="Nothing to show"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:padding="16dp"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/scroll_view_gig_list"
+        android:layout_width="match_parent"
+        android:layout_height="592dp">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gig_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </ScrollView>
 </LinearLayout>
