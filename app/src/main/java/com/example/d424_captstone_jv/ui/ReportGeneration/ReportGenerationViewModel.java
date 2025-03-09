@@ -17,9 +17,12 @@ public class ReportGenerationViewModel extends ViewModel {
     private final MutableLiveData<Date> startDate = new MutableLiveData<>();
 
     private final MutableLiveData<Date> endDate = new MutableLiveData<>();
+    private final int userId;
 
-    public ReportGenerationViewModel(GigRepository gigRepository) {
+    public ReportGenerationViewModel(GigRepository gigRepository, int userId) {
+        super();
         this.gigRepository = gigRepository;
+        this.userId = userId;
     }
 
     public void setStartDate(Date date) {
@@ -38,7 +41,7 @@ public class ReportGenerationViewModel extends ViewModel {
         return endDate;
     }
 
-    public LiveData<List<Gig>> getGigsInDateRange(String startDate, String endDate) {
-        return gigRepository.getGigsInDateRange(startDate, endDate);
+    public LiveData<List<Gig>> getGigsInDateRange(String startDate, String endDate, int userid  ) {
+        return gigRepository.getGigsInDateRange(startDate, endDate, userid);
     }
 }

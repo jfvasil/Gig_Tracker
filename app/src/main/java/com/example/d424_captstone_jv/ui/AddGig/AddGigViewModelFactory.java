@@ -19,6 +19,6 @@ public class AddGigViewModelFactory implements ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(AddGigViewModel.class)) {
             return (T) new AddGigViewModel(gigRepository);
         }
-        throw new IllegalArgumentException("Unknown ViewModel class");
+        throw new IllegalArgumentException("Unknown ViewModel class!");
     }
 }

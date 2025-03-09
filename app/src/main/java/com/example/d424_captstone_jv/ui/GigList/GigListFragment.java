@@ -18,13 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.d424_captstone_jv.Database.GigRepository;
 import com.example.d424_captstone_jv.R;
 import com.example.d424_captstone_jv.ui.GigAdapter;
+import com.example.d424_captstone_jv.ui.SessionManager;
 
 import java.util.ArrayList;
 
 public class GigListFragment extends Fragment {
     private GigListViewModel gigListViewModel;
     private EditText searchBar;
-    private RadioButton radioCompleted, radioUpcoming;
+    private RadioButton radioCompleted, radioUpcoming, radioAll;
     private GigAdapter gigAdapter;
 
     @Override
@@ -34,19 +35,24 @@ public class GigListFragment extends Fragment {
 
         GigRepository gigRepository = new GigRepository(requireActivity().getApplication());
 
+        SessionManager sessionManager = new SessionManager(requireContext());
+        int userId = sessionManager.getUserId();
 
-        GigListViewModelFactory factory = new GigListViewModelFactory(gigRepository);
+
+
+        GigListViewModelFactory factory = new GigListViewModelFactory(gigRepository, userId);
         gigListViewModel = new ViewModelProvider(this, factory).get(GigListViewModel.class);
 
         RecyclerView recyclerView = root.findViewById(R.id.gig_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        gigAdapter = new GigAdapter(new ArrayList<>());
+        gigAdapter = new GigAdapter(requireContext(), gigListViewModel,new ArrayList<>());
         recyclerView.setAdapter(gigAdapter);
 
         searchBar = root.findViewById(R.id.search_gigs);
         radioCompleted = root.findViewById(R.id.filter_completed);
         radioUpcoming = root.findViewById(R.id.filter_upcoming);
+//        radioAll = root.findViewById(R.id.filter_all);
 
 
 

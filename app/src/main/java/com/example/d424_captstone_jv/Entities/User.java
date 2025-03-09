@@ -3,6 +3,8 @@ package com.example.d424_captstone_jv.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 @Entity(tableName = "users")
 public class User {
 
@@ -11,7 +13,7 @@ public class User {
 
     public String name;
     public String email;
-    public String password;
+    private String password;
 
     public User(String name, String email, String password) {
         this.name = name;
@@ -51,6 +53,15 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashPassword(password);
     }
+
+    private String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt(12));
+    }
+
+    public boolean verifyPassword(String inputPassword) {
+        return BCrypt.checkpw(inputPassword, this.password);
+    }
+
 }

@@ -6,6 +6,13 @@
     android:orientation="vertical">
 
     <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="textPersonName"/>
+
+    <EditText
         android:id="@+id/emailInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,10 +27,10 @@
         android:inputType="textPassword"/>
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In"/>
+        android:text="Register"/>
 
     <TextView
         android:id="@+id/errorText"
@@ -31,13 +38,4 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/holo_red_light"
         android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/signUpLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Not registered? Sign up here"
-        android:textColor="@android:color/holo_blue_dark"
-        android:paddingTop="16dp"
-        android:textSize="16sp"/>
 </LinearLayout>

@@ -1,13 +1,26 @@
 package com.example.d424_captstone_jv.Entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "gigs")
+@Entity(
+        tableName = "gigs",
+        foreignKeys = @ForeignKey(
+                entity = User.class,
+                parentColumns = "id",
+                childColumns = "userId",
+                onDelete = ForeignKey.CASCADE
+        )
+)
 public class Gig {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
+
+    @ColumnInfo(index = true)
+    public int userId;
 
     public String venue;
     public String setList;
@@ -19,8 +32,9 @@ public class Gig {
     public boolean isCompleted;
     public boolean isPaid;
 
-    public Gig(String venue, String setList, double expectedPayment, double actualPayment, String date,
+    public Gig(int userId,  String venue, String setList, double expectedPayment, double actualPayment, String date,
                String audienceFeedback, boolean isCompleted) {
+        this.userId = userId;
         this.venue = venue;
         this.setList = setList;
         this.expectedPayment = expectedPayment;
@@ -40,6 +54,15 @@ public class Gig {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getVenue() {

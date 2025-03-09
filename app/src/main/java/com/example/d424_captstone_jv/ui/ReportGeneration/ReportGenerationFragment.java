@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.d424_captstone_jv.Database.GigRepository;
 
 import com.example.d424_captstone_jv.databinding.FragmentReportGeneratorBinding;
+import com.example.d424_captstone_jv.ui.SessionManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,11 +38,16 @@ public class ReportGenerationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Application application = requireActivity().getApplication();
         GigRepository gigRepository = new GigRepository(application);
-        ReportGenerationViewModelFactory factory = new ReportGenerationViewModelFactory(gigRepository);
+
+        SessionManager sessionManager = new SessionManager(requireContext());
+        int userId = sessionManager.getUserId();
+
+        ReportGenerationViewModelFactory factory = new ReportGenerationViewModelFactory(gigRepository,userId);
         reportViewModel = new ViewModelProvider(this, factory).get(ReportGenerationViewModel.class);
 
         binding = FragmentReportGeneratorBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
 
 
         binding.startDateInput.setOnClickListener(v -> showDatePickerDialog(true));
@@ -66,7 +72,7 @@ public class ReportGenerationFragment extends Fragment {
             String endDate = binding.endDateInput.getText().toString().trim();
 
             if (!startDate.isEmpty() && !endDate.isEmpty()) {
-                reportViewModel.getGigsInDateRange(startDate, endDate).observe(getViewLifecycleOwner(), gigs -> {
+                reportViewModel.getGigsInDateRange(startDate, endDate,userId).observe(getViewLifecycleOwner(), gigs -> {
                     if (gigs != null && !gigs.isEmpty()) {
                         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                             if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

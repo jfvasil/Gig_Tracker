@@ -1,6 +1,7 @@
 package com.example.d424_captstone_jv.Database;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
@@ -44,37 +45,43 @@ public class GigRepository {
     }
 
 
-    public void updateGig(Gig gig) {
+    public void updateGig(Gig gig, Runnable onSuccess) {
         dbExecutor.execute(() -> gigDao.update(gig));
+        onSuccess.run();
     }
 
     public void deleteGig(Gig gig) {
         dbExecutor.execute(() -> gigDao.delete(gig));
     }
 
-    public LiveData<List<Gig>> searchGigs(String query) {
-        return gigDao.searchGigs("%" + query + "%");
+    public LiveData<List<Gig>> searchGigs(String query, int userId) {
+        return gigDao.searchGigs("%" + query + "%", userId);
     }
 
-    public LiveData<List<Gig>> getCompletedGigs() {
-        return gigDao.getCompletedGigs();
+    public LiveData<List<Gig>> getCompletedGigs(int userId) {
+        return gigDao.getCompletedGigs(userId);
     }
 
-    public LiveData<List<Gig>> getUpcomingGigs() {
-        return gigDao.getUpcomingGigs();
+    public LiveData<List<Gig>> getUpcomingGigs(int userId) {
+        return gigDao.getUpcomingGigs(userId);
     }
 
-    public LiveData<Double> getTotalPaymentsForMonth(String startDate, String endDate) {
-        return gigDao.getTotalPaymentsForMonth(startDate, endDate);
+    public LiveData<Double> getTotalPaymentsForMonth(String startDate, String endDate, int userId) {
+        return gigDao.getTotalPaymentsForMonth(startDate, endDate, userId);
     }
 
     public LiveData<List<Gig>> getAllGigs() {
         return gigDao.getAllGigs();
     }
 
-    public LiveData<List<Gig>> getGigsInDateRange(String startDate, String endDate) {
-        return gigDao.getGigsInDateRange(startDate, endDate);
+    public LiveData<List<Gig>> getGigsInDateRange(String startDate, String endDate, int userId) {
+        return gigDao.getGigsInDateRange(startDate, endDate, userId);
     }
+
+    public LiveData<List<Gig>> getGigsForUser(int userId) {
+        return gigDao.getGigsForUser(userId);
+    }
+
 
 
 }

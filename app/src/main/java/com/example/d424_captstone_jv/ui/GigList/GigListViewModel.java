@@ -12,6 +12,8 @@ import java.util.List;
 
 public class GigListViewModel extends ViewModel {
     private final GigRepository gigRepository;
+
+    private final int userId;
     private final MutableLiveData<String> searchQuery = new MutableLiveData<>("");
     private final MutableLiveData<Boolean> isCompletedFilter = new MutableLiveData<>(null);
 
@@ -19,9 +21,11 @@ public class GigListViewModel extends ViewModel {
 
     private final LiveData<List<Gig>> gigs;
 
-    public GigListViewModel(GigRepository gigRepository) {
+    public GigListViewModel(GigRepository gigRepository, int userId) {
+        super();
+        this.userId = userId;
         this.gigRepository = gigRepository;
-        this.gigs = gigRepository.getAllGigs();
+        gigs = gigRepository.getGigsForUser(userId);
     }
 
     public LiveData<List<Gig>> getFilteredGigs() {
@@ -29,15 +33,15 @@ public class GigListViewModel extends ViewModel {
             if (query == null || query.trim().isEmpty()) {
                 return Transformations.switchMap(isCompletedFilter, isCompleted -> {
                     if (isCompleted == null) {
-                        return gigRepository.getAllGigs();
+                        return gigRepository.getGigsForUser(userId);
                     } else if (isCompleted) {
-                        return gigRepository.getCompletedGigs();
+                        return gigRepository.getCompletedGigs(userId);
                     } else {
-                        return gigRepository.getUpcomingGigs();
+                        return gigRepository.getUpcomingGigs(userId);
                     }
                 });
             } else {
-                return gigRepository.searchGigs(query);
+                return gigRepository.searchGigs(query, userId);
             }
         });
     }
@@ -52,6 +56,10 @@ public class GigListViewModel extends ViewModel {
 
     public LiveData<List<Gig>> getGigs() {
         return gigs;
+    }
+
+    public void deleteGig(Gig gig) {
+        gigRepository.deleteGig(gig);
     }
 }
 

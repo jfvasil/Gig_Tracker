@@ -63,4 +63,30 @@
         android:textSize="16sp"
         android:textColor="@android:color/black"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:paddingTop="8dp">
+
+        <ImageButton
+            android:id="@+id/button_edit_gig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="Edit Gig"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:id="@+id/button_delete_gig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:contentDescription="Delete Gig"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"/>
+    </LinearLayout>
+
 </LinearLayout>

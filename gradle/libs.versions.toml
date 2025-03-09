@@ -14,8 +14,12 @@ room = "2.6.1"
 hilt = "2.50"
 kotlin = "2.0.21"
 firebaseMessaging = "23.3.1"
-
+mockito = "5.3.1"
+archCoreTesting = "2.1.0"
 workRuntime = "2.8.1"
+mockitoAndroid = "5.3.1"
+androidxTestCore = "1.5.0"
+androidxTestExtJunit = "1.1.5"
 
 
 [libraries]
@@ -35,8 +39,13 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 itext = { module = "com.itextpdf:itext7-core", version = "7.2.3" }
-
-
+bcrypt = { module = "org.mindrot:jbcrypt", version = "0.4" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroid" }
+#mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito" }
+arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "archCoreTesting" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExtJunit" }
 
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 

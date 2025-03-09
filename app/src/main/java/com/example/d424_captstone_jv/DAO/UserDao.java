@@ -1,5 +1,6 @@
 package com.example.d424_captstone_jv.DAO;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -24,6 +25,10 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
     User getUserByEmail(String email);
 
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    LiveData<User> getUserByEmailLive(String email);
+
+
     @Query("SELECT * FROM users")
-    List<User> getAllUsers();
+    LiveData<List<User>> getAllUsers();
 }

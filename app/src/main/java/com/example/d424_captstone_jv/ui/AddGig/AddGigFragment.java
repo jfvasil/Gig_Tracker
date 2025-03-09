@@ -23,6 +23,7 @@ import androidx.navigation.Navigation;
 
 import com.example.d424_captstone_jv.R;
 import com.example.d424_captstone_jv.databinding.FragmentAddGigBinding;
+import com.example.d424_captstone_jv.ui.SessionManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,6 +40,10 @@ public class AddGigFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         Application application = requireActivity().getApplication();
+
+        SessionManager sessionManager = new SessionManager(requireContext());
+        int userId = sessionManager.getUserId();
+
         AddGigViewModelFactory factory = new AddGigViewModelFactory(application);
         addGigViewModel = new ViewModelProvider(this, factory).get(AddGigViewModel.class);
 
@@ -46,6 +51,8 @@ public class AddGigFragment extends Fragment {
         View root = binding.getRoot();
 
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+
+
 
         EditText venueEditText = binding.inputVenue;
         EditText expectedPaymentEditText = binding.inputExpectedPayment;
@@ -58,6 +65,26 @@ public class AddGigFragment extends Fragment {
         EditText audienceFeedbackEditText = binding.inputAudienceFeedback;
         EditText actualPaymentEditText = binding.inputActualPayment;
         Button saveGigButton = binding.buttonSaveGig;
+
+        Bundle args = getArguments();
+        int gigId;
+        if (args != null) {
+             gigId = args.getInt("gigId", -1);
+            if (gigId != -1) {
+                binding.inputVenue.setText(args.getString("venue"));
+                binding.inputExpectedPayment.setText(String.valueOf(args.getDouble("expectedPayment")));
+                binding.inputSetList.setText(args.getString("setList"));
+                binding.gigSelectDate.setText(args.getString("date"));
+                binding.radioCompleted.setChecked(args.getBoolean("isCompleted"));
+                binding.inputAudienceFeedback.setText(args.getString("audienceFeedback"));
+                binding.inputActualPayment.setText(String.valueOf(args.getDouble("actualPayment")));
+
+                binding.buttonSaveGig.setText("Update Gig");
+            }
+        } else {
+            gigId = -1;
+        }
+
 
         dateTextView.setOnClickListener(view -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -104,7 +131,7 @@ public class AddGigFragment extends Fragment {
             String audienceFeedback = audienceFeedbackEditText.getText().toString();
 
 
-            addGigViewModel.saveGig(venue, expectedPayment, setList, gigDate, isCompleted, audienceFeedback, actualPayment);
+            addGigViewModel.saveGig(gigId,userId,venue, expectedPayment, setList, gigDate, isCompleted, audienceFeedback, actualPayment);
         });
 
         addGigViewModel.getSaveSuccess().observe(getViewLifecycleOwner(), success -> {

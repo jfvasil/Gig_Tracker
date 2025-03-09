@@ -17,6 +17,7 @@ import com.example.d424_captstone_jv.Database.GigRepository;
 import com.example.d424_captstone_jv.R;
 
 import com.example.d424_captstone_jv.ui.GigAdapter;
+import com.example.d424_captstone_jv.ui.SessionManager;
 
 
 import java.util.ArrayList;
@@ -32,14 +33,18 @@ public class DashboardFragment extends Fragment {
 
         GigRepository gigRepository = new GigRepository(requireActivity().getApplication());
 
-        DashboardViewModelFactory factory = new DashboardViewModelFactory(gigRepository);
+        SessionManager sessionManager = new SessionManager(requireContext());
+        int userId = sessionManager.getUserId();
+
+
+        DashboardViewModelFactory factory = new DashboardViewModelFactory(gigRepository, userId);
         dashboardViewModel = new ViewModelProvider(this, factory).get(DashboardViewModel.class);
 
 
 
         RecyclerView upcomingGigsRecyclerView = root.findViewById(R.id.gig_recycler_view);
         upcomingGigsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        gigAdapter = new GigAdapter(new ArrayList<>());
+        gigAdapter = new GigAdapter(requireContext(),null,new ArrayList<>());
         upcomingGigsRecyclerView.setAdapter(gigAdapter);
 
         totalPaymentsTextView = root.findViewById(R.id.payment_summary_text);

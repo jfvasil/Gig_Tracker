@@ -17,18 +17,18 @@ public class DashboardViewModel extends ViewModel {
     private final LiveData<List<Gig>> upcomingGigs;
     private final LiveData<Double> totalPayments;
 
-    public DashboardViewModel(GigRepository gigRepository) {
+    public DashboardViewModel(GigRepository gigRepository, int userId) {
         this.gigRepository = gigRepository;
-        this.upcomingGigs = gigRepository.getUpcomingGigs();
+        this.upcomingGigs = gigRepository.getUpcomingGigs(userId);
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Calendar calendar = Calendar.getInstance();
-        String endDate = sdf.format(calendar.getTime()); // Today
+        String endDate = sdf.format(calendar.getTime());
         calendar.add(Calendar.DAY_OF_MONTH, -30);
-        String startDate = sdf.format(calendar.getTime()); // 30 days ago
+        String startDate = sdf.format(calendar.getTime());
 
-        this.totalPayments = gigRepository.getTotalPaymentsForMonth(startDate, endDate);
+        this.totalPayments = gigRepository.getTotalPaymentsForMonth(startDate, endDate, userId);
     }
 
     public LiveData<List<Gig>> getUpcomingGigs() {

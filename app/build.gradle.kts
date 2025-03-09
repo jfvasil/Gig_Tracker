@@ -103,6 +103,7 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.itext)
+    implementation(libs.bcrypt)
 
 
     implementation(libs.room.runtime)
@@ -122,6 +123,18 @@ dependencies {
 
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+//    testImplementation(libs.mockito.inline)
+    testImplementation(libs.arch.core.testing)
+    testImplementation(libs.junit)
+
+    // Android Instrumented Testing (if needed)
+    androidTestImplementation(libs.mockito.android)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    testImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+
+
+
 }

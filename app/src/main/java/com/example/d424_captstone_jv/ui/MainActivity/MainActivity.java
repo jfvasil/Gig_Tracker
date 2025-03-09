@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.example.d424_captstone_jv.R;
+import com.example.d424_captstone_jv.ui.SessionManager;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -48,27 +49,20 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        SessionManager sessionManager = new SessionManager(this);
+        if (!sessionManager.isLoggedIn()) {
+            navController.navigate(R.id.signInFragment);
+        }
 
-//        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-//
-//            if (destination.getId() == R.id.signInFragment) {
-//
-//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-//
-//            } else {
-//
-//                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-//            }
-//        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main, menu);
-
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.main, menu);
+//
+//        return true;
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {

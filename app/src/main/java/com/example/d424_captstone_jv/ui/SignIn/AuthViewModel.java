@@ -1,4 +1,4 @@
-package com.example.d424_captstone_jv.ui.MainActivity;
+package com.example.d424_captstone_jv.ui.SignIn;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,7 +12,7 @@ public class AuthViewModel extends ViewModel {
     }
 
     public void authenticateUser(String email, String password) {
-        // Simulated authentication
+
         if (email.equals("test@example.com") && password.equals("password")) {
             authStatus.setValue(true);
         } else {
