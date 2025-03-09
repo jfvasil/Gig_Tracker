@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1059082993735",
+    "project_id": "git-tracker-app",
+    "storage_bucket": "git-tracker-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059082993735:android:a9424e4472cbb79781b162",
+        "android_client_info": {
+          "package_name": "com.example.d424_captstone_jv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCU9Wq3t1SlWD4yA954Ho9sjEd7Nzk_6Bk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

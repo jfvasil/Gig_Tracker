@@ -1,0 +1,361 @@
+@startuml
+class com.example.d424_captstone_jv.Entities.GigWithUser {
++ Gig gig
++ String userName
++ String userEmail
+}
+
+class com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerationViewModelFactory {
+- GigRepository gigRepository
+- int userId
++ T create(Class<T>)
+}
+
+
+class com.example.d424_captstone_jv.ui.GigList.GigListViewModel {
+- GigRepository gigRepository
+- int userId
+- MutableLiveData<String> searchQuery
+- MutableLiveData<Boolean> isCompletedFilter
+- LiveData<List<Gig>> gigs
++ LiveData<List<Gig>> getFilteredGigs()
++ void setSearchQuery(String)
++ void setFilter(Boolean)
++ LiveData<List<Gig>> getGigs()
++ void deleteGig(Gig)
+}
+
+
+class com.example.d424_captstone_jv.ui.Dashboard.DashboardViewModel {
+- GigRepository gigRepository
+- LiveData<List<Gig>> upcomingGigs
+- LiveData<Double> totalPayments
++ LiveData<List<Gig>> getUpcomingGigs()
++ LiveData<Double> getTotalPayments()
+}
+
+
+class com.example.d424_captstone_jv.ui.GigList.GigListFragment {
+- GigListViewModel gigListViewModel
+- EditText searchBar
+- RadioButton radioCompleted
+- TextView textViewEmptyMessage
+- GigAdapter gigAdapter
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+class com.example.d424_captstone_jv.Entities.Gig {
++ int id
++ int userId
++ String venue
++ String setList
++ double expectedPayment
++ double actualPayment
++ String date
++ String audienceFeedback
++ boolean isCompleted
++ boolean isPaid
++ int getId()
++ void setId(int)
++ int getUserId()
++ void setUserId(int)
++ String getVenue()
++ void setVenue(String)
++ String getSetList()
++ void setSetList(String)
++ double getExpectedPayment()
++ void setExpectedPayment(double)
++ double getActualPayment()
++ void setActualPayment(double)
++ String getDate()
++ void setDate(String)
++ String getAudienceFeedback()
++ void setAudienceFeedback(String)
++ boolean isCompleted()
++ void setCompleted(boolean)
+}
+
+
+class com.example.d424_captstone_jv.Entities.User {
++ int id
++ String name
++ String email
+- String password
++ int getId()
++ void setId(int)
++ String getName()
++ void setName(String)
++ String getEmail()
++ void setEmail(String)
++ String getPassword()
++ void setPassword(String)
+- String hashPassword(String)
++ boolean verifyPassword(String)
+}
+
+
+class com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerationFragment {
+- FragmentReportGeneratorBinding binding
+- ReportGenerationViewModel reportViewModel
+- Calendar calendar
+- SimpleDateFormat dateFormat
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void showDatePickerDialog(boolean)
+}
+
+
+class com.example.d424_captstone_jv.ui.Auth.SignInFragment {
+- FragmentSignInBinding binding
+- UserViewModel userViewModel
+- SessionManager sessionManager
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onDestroyView()
+}
+
+
+class com.example.d424_captstone_jv.ui.GigAdapter {
+- List<Gig> gigList
+- GigListViewModel gigListViewModel
+- Context context
++ GigViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(GigViewHolder,int)
++ int getItemCount()
++ void setGigs(List<Gig>)
++ boolean isEmpty()
+}
+
+
+class com.example.d424_captstone_jv.ui.GigAdapter$GigViewHolder {
+~ TextView venueTextView
+~ TextView setListTextView
+~ ImageButton deleteButton
+}
+
+class com.example.d424_captstone_jv.ui.AddGig.AddGigViewModelFactory {
+- GigRepository gigRepository
++ T create(Class<T>)
+}
+
+
+class com.example.d424_captstone_jv.ui.Dashboard.DashboardFragment {
+- DashboardViewModel dashboardViewModel
+- GigAdapter gigAdapter
+- TextView totalPaymentsTextView
+- TextView textViewEmptyMessage
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+class com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerator {
++ {static} void generateGigReport(Context,List<Gig>,String,String)
+}
+
+class com.example.d424_captstone_jv.ui.SessionManager {
+- {static} String PREF_NAME
+- {static} String KEY_USER_ID
+- {static} String KEY_USER_EMAIL
+- SharedPreferences sharedPreferences
+- SharedPreferences.Editor editor
++ void saveUserSession(int,String)
++ int getUserId()
++ boolean isLoggedIn()
+}
+
+
+abstract class com.example.d424_captstone_jv.Database.GigDataBaseBuilder {
+- {static} GigDataBaseBuilder INSTANCE
++ {abstract}UserDao userDao()
++ {abstract}GigDao gigDao()
+~ {static} GigDataBaseBuilder getDatabase(Context)
+}
+
+
+interface com.example.d424_captstone_jv.DAO.GigDao {
+~ void insert(Gig)
+~ void update(Gig)
+~ void delete(Gig)
+~ LiveData<List<Gig>> getAllGigs()
+~ Gig getGigById(int)
+~ LiveData<List<Gig>> searchGigs(String,int)
+~ LiveData<List<Gig>> getCompletedGigs(int)
+~ LiveData<List<Gig>> getUpcomingGigs(int)
+~ LiveData<Double> getTotalPaymentsForMonth(String,String,int)
+~ LiveData<List<Gig>> getGigsInDateRange(String,String,int)
+~ LiveData<List<Gig>> getGigsForUser(int)
+~ LiveData<List<GigWithUser>> getGigsWithUserDetails(int)
+}
+
+class com.example.d424_captstone_jv.Database.UserRepository {
+- UserDao userDao
+- {static} int THREAD_COUNT
+- {static} ExecutorService dbExecutor
++ void registerUser(User,OnUserRegisteredListener)
++ void authenticateUser(String,String,OnUserAuthenticatedListener)
++ LiveData<User> getUserByEmail(String)
+}
+
+
+interface com.example.d424_captstone_jv.Database.UserRepository$OnUserRegisteredListener {
+~ void onSuccess()
+~ void onFailure(String)
+}
+
+interface com.example.d424_captstone_jv.Database.UserRepository$OnUserAuthenticatedListener {
+~ void onSuccess(User)
+~ void onFailure(String)
+}
+
+class com.example.d424_captstone_jv.ui.MainActivity.MainActivity {
+- AppBarConfiguration mAppBarConfiguration
+- ActivityMainBinding binding
+# void onCreate(Bundle)
++ boolean onSupportNavigateUp()
+}
+
+
+class com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerationViewModel {
+- GigRepository gigRepository
+- MutableLiveData<Date> startDate
+- MutableLiveData<Date> endDate
+- int userId
++ void setStartDate(Date)
++ void setEndDate(Date)
++ LiveData<Date> getStartDate()
++ LiveData<Date> getEndDate()
++ LiveData<List<Gig>> getGigsInDateRange(String,String,int)
+}
+
+
+class com.example.d424_captstone_jv.ui.AddGig.AddGigViewModel {
+- GigRepository gigRepository
+- MutableLiveData<String> venue
+- MutableLiveData<Double> expectedPayment
+- MutableLiveData<String> setList
+- MutableLiveData<Date> gigDate
+- MutableLiveData<Boolean> isCompleted
+- MutableLiveData<String> audienceFeedback
+- MutableLiveData<Double> actualPayment
++ MutableLiveData<String> validationError
+- MutableLiveData<Boolean> saveSuccess
++ void setVenue(String)
++ void setExpectedPayment(Double)
++ void setSetList(String)
++ void setGigDate(Date)
++ void setCompleted(boolean)
++ void setAudienceFeedback(String)
++ void setActualPayment(Double)
++ LiveData<Date> getGigDate()
++ LiveData<List<Gig>> getAllGigs()
++ LiveData<Boolean> getSaveSuccess()
++ void saveGig(int,int,String,double,String,String,boolean,String,double)
+}
+
+
+class com.example.d424_captstone_jv.ui.Auth.UserViewModel {
+- UserRepository userRepository
+- MutableLiveData<String> authenticationMessage
+- MutableLiveData<Boolean> authenticationSuccess
+- MutableLiveData<Boolean> registrationSuccess
++ void registerUser(String,String,String)
++ void authenticateUser(String,String)
++ LiveData<User> getUserByEmail(String)
++ LiveData<String> getAuthenticationMessage()
++ LiveData<Boolean> getAuthenticationSuccess()
++ LiveData<Boolean> getRegistrationSuccess()
+}
+
+
+class com.example.d424_captstone_jv.Database.GigRepository {
+- UserDao userDao
+- GigDao gigDao
+- {static} int THREAD_COUNT
+- {static} ExecutorService dbExecutor
++ void insertUser(User)
++ User getUserByEmail(String)
++ void insertGig(Gig,Runnable)
++ void updateGig(Gig,Runnable)
++ void deleteGig(Gig)
++ LiveData<List<Gig>> searchGigs(String,int)
++ LiveData<List<Gig>> getCompletedGigs(int)
++ LiveData<List<Gig>> getUpcomingGigs(int)
++ LiveData<Double> getTotalPaymentsForMonth(String,String,int)
++ LiveData<List<Gig>> getAllGigs()
++ LiveData<List<Gig>> getGigsInDateRange(String,String,int)
++ LiveData<List<Gig>> getGigsForUser(int)
+}
+
+
+class com.example.d424_captstone_jv.ui.Auth.SignUpFragment {
+- FragmentSignUpBinding binding
+- UserViewModel userViewModel
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onDestroyView()
+}
+
+
+class com.example.d424_captstone_jv.ui.AddGig.AddGigFragment {
+- FragmentAddGigBinding binding
+- AddGigViewModel addGigViewModel
+- Calendar calendar
+- SimpleDateFormat dateFormat
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onDestroyView()
+}
+
+
+class com.example.d424_captstone_jv.ui.Dashboard.DashboardViewModelFactory {
+- GigRepository gigRepository
+- int userId
++ T create(Class<T>)
+}
+
+
+class com.example.d424_captstone_jv.ui.GigList.GigListViewModelFactory {
+- GigRepository gigRepository
+- int userId
++ T create(Class<T>)
+}
+
+
+class com.example.d424_captstone_jv.ui.Auth.UserViewModelFactory {
+- Application application
++ T create(Class<T>)
+}
+
+
+interface com.example.d424_captstone_jv.DAO.UserDao {
+~ void insert(User)
+~ void update(User)
+~ void delete(User)
+~ User getUserByEmail(String)
+~ LiveData<User> getUserByEmailLive(String)
+~ LiveData<List<User>> getAllUsers()
+}
+
+
+
+com.example.d424_captstone_jv.ui.ReportGeneration.Factory <|.. com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerationViewModelFactory
+androidx.lifecycle.ViewModel <|-- com.example.d424_captstone_jv.ui.GigList.GigListViewModel
+androidx.lifecycle.ViewModel <|-- com.example.d424_captstone_jv.ui.Dashboard.DashboardViewModel
+androidx.fragment.app.Fragment <|-- com.example.d424_captstone_jv.ui.GigList.GigListFragment
+androidx.fragment.app.Fragment <|-- com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerationFragment
+androidx.fragment.app.Fragment <|-- com.example.d424_captstone_jv.ui.Auth.SignInFragment
+com.example.d424_captstone_jv.ui.Adapter <|-- com.example.d424_captstone_jv.ui.GigAdapter
+com.example.d424_captstone_jv.ui.GigAdapter +.. com.example.d424_captstone_jv.ui.GigAdapter$GigViewHolder
+com.example.d424_captstone_jv.ui.ViewHolder <|-- com.example.d424_captstone_jv.ui.GigAdapter$GigViewHolder
+com.example.d424_captstone_jv.ui.AddGig.Factory <|.. com.example.d424_captstone_jv.ui.AddGig.AddGigViewModelFactory
+androidx.fragment.app.Fragment <|-- com.example.d424_captstone_jv.ui.Dashboard.DashboardFragment
+androidx.room.RoomDatabase <|-- com.example.d424_captstone_jv.Database.GigDataBaseBuilder
+com.example.d424_captstone_jv.Database.UserRepository +.. com.example.d424_captstone_jv.Database.UserRepository$OnUserRegisteredListener
+com.example.d424_captstone_jv.Database.UserRepository +.. com.example.d424_captstone_jv.Database.UserRepository$OnUserAuthenticatedListener
+androidx.appcompat.app.AppCompatActivity <|-- com.example.d424_captstone_jv.ui.MainActivity.MainActivity
+androidx.lifecycle.ViewModel <|-- com.example.d424_captstone_jv.ui.ReportGeneration.ReportGenerationViewModel
+androidx.lifecycle.ViewModel <|-- com.example.d424_captstone_jv.ui.AddGig.AddGigViewModel
+androidx.lifecycle.AndroidViewModel <|-- com.example.d424_captstone_jv.ui.Auth.UserViewModel
+androidx.fragment.app.Fragment <|-- com.example.d424_captstone_jv.ui.Auth.SignUpFragment
+androidx.fragment.app.Fragment <|-- com.example.d424_captstone_jv.ui.AddGig.AddGigFragment
+com.example.d424_captstone_jv.ui.Dashboard.Factory <|.. com.example.d424_captstone_jv.ui.Dashboard.DashboardViewModelFactory
+com.example.d424_captstone_jv.ui.GigList.Factory <|.. com.example.d424_captstone_jv.ui.GigList.GigListViewModelFactory
+com.example.d424_captstone_jv.ui.Auth.Factory <|.. com.example.d424_captstone_jv.ui.Auth.UserViewModelFactory
+@enduml

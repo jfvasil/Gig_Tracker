@@ -13,7 +13,7 @@ import com.example.d424_captstone_jv.Entities.Gig;
 
 @Database(entities = {User.class,
         Gig.class},
-        version = 2,
+        version = 4,
         exportSchema = false)
 public abstract class GigDataBaseBuilder extends RoomDatabase {
 
