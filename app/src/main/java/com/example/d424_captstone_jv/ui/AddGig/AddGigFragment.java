@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -129,6 +130,13 @@ public class AddGigFragment extends Fragment {
             String gigDate = dateTextView.getText().toString();
             boolean isCompleted = radioCompleted.isChecked();
             String audienceFeedback = audienceFeedbackEditText.getText().toString();
+
+
+            addGigViewModel.validationError.observe(getViewLifecycleOwner(), errorMessage -> {
+                if (errorMessage != null && !errorMessage.isEmpty()) {
+                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
             addGigViewModel.saveGig(gigId,userId,venue, expectedPayment, setList, gigDate, isCompleted, audienceFeedback, actualPayment);

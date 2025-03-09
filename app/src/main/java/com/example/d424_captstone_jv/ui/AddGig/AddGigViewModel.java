@@ -26,6 +26,8 @@ public class AddGigViewModel extends ViewModel {
     private final MutableLiveData<String> audienceFeedback = new MutableLiveData<>();
     private final MutableLiveData<Double> actualPayment = new MutableLiveData<>();
 
+    public MutableLiveData<String> validationError = new MutableLiveData<>();
+
     public AddGigViewModel(GigRepository repository) {
         super();
         this.gigRepository = repository;
@@ -83,15 +85,27 @@ public class AddGigViewModel extends ViewModel {
             return;
         }
 
+        if(venue == null || venue.trim().isEmpty()){
+            saveSuccess.setValue(false);
+            validationError.setValue("Venue cannot be empty.");
+            return;
+        }
+
+        if(date == null || date.isEmpty() || date.equals("Click here to Select a Date")){
+            saveSuccess.setValue(false);
+            validationError.setValue("Date cannot be empty.");
+            return;
+        }
+
         String formattedDate = gigDate.getValue() != null ?
                 new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(gigDate.getValue()) : null;
 
         Gig gig = new Gig(userId,
-                venue != null ? venue : "",
+                venue,
                 setList != null ? setList : "",
                 expectedPayment,
                 actualPayment,
-                date != null ? date : "",
+                date,
                 audienceFeedback != null ? audienceFeedback : "",
                 isCompleted
         );
