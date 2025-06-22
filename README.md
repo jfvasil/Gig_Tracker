@@ -20,15 +20,4 @@ Built using **Java**, **Android Studio**, and **SQLite**, the app offers a simpl
 - SQLite (local database)  
 - Material Design UI components  
 
-## Screenshots  
-### Dashboard  
-![Dashboard](/mnt/data/Screenshot%202025-03-09%20124832.png)
 
-### Navigation Menu  
-![Navigation Menu](/mnt/data/Screenshot%202025-03-09%20124849.png)
-
-### Add/Update Gig  
-![Add Gig](/mnt/data/Screenshot%202025-03-09%20124903.png)
-
-## Getting Started  
-1. Clone the repository:  
